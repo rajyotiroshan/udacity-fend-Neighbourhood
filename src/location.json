@@ -1,0 +1,50 @@
+[
+{
+	"name":"GTB nagar Metro Station",
+	"street":"new police lin",
+	"city":"NorthWest Delhi",
+	"state":"Delhi",
+	"pin":"110009",
+	"pos":{"lat":28.698752,"lng":77.201742}
+},
+{
+	"name":"Model Town Metro Station",
+	"street":"B6/1 Ring Rd",
+	"city":"New Delhi",
+	"state":"Delhi",
+	"pin":"110009",
+	"pos":{"lat":28.70286,"lng":77.193675}
+},
+{
+	"name":"Jahangirpuris Metro Station",
+	"street":"Grand Trunk Rd",
+	"city":"New Delhi",
+	"state":"Delhi",
+	"pin":"110033",
+	"pos":{"lat":28.725872,"lng":77.16274}
+},
+{
+	"name":"Azadpur Metro Station",
+	"street":"Gujranwala Town",
+	"city":"Delhi",
+	"state":"Delhi",
+	"pin":"110052",
+	"pos":{"lat":28.706963,"lng":77.180586}
+},
+{
+	"name":"Vishwavidyalaya Metro Station",
+	"street":"The Mall Rd",
+	"city":"New Delhi",
+	"state":"Delhi",
+	"pin":"110007",
+	"pos":{"lat":28.694729,"lng":77.214575}
+},
+{
+	"name":"Civil Lines Metro Station",
+	"street":"Sham Nath Marg",
+	"city":"New Delhi",
+	"state":"Delhi",
+	"pin":"110054",
+	"pos":{"lat":28.676959,"lng":77.22496}
+}
+]
