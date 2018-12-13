@@ -4,7 +4,8 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 class MapContainer extends Component {
  state={
   map:null,
-  markers:[]
+  activeMarkers:{},
+  showingInfoWindow:false
  };
  //react component listener
 componentDidmount(){
@@ -19,7 +20,14 @@ mapReady = (props, map) =>{
 
 };
 
-
+onMapClicked = (props) => {
+  if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker:null
+      })
+    }
+};
   render() {
     //save passed locations.
     let locations= this.props.locations;
@@ -50,6 +58,7 @@ mapReady = (props, map) =>{
             style={style}
             initialCenter={center}
             bounds={bounds}
+            onClick={this.onMapClicked}
             >
             {locations && locations.map((loc)=>{
               return <Marker title={loc.name} position={loc.pos}/>;
@@ -59,7 +68,7 @@ mapReady = (props, map) =>{
               marker={this.state.activeMarker}
               visible={this.state.showingInfoWindow}>
                 <div>
-                  <h3>{this.state.activeMarker.title}</h1>
+                  <h3>{this.state.activeMarker}</h3>
                 </div>
             </InfoWindow>
       </Map>
