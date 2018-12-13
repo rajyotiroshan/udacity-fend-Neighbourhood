@@ -3,7 +3,8 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
  
 class MapContainer extends Component {
  state={
-  map:null
+  map:null,
+  marker:[]
  };
  //react component listener
 componentDidmount(){
@@ -32,7 +33,7 @@ mapReady = (props, map) =>{
       <Map  role="application"
             ariaLabel="map"
             onReady={this.mapReady}
-          google={this.props.google} 
+            google={this.props.google} 
             zoom={this.props.zoom}
             style={style}
             initialCenter={center}
