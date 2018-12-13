@@ -5,7 +5,8 @@ class MapContainer extends Component {
  state={
   map:null,
   activeMarkers:{},
-  showingInfoWindow:false
+  showingInfoWindow:false,
+  selectedPlace:{}
  };
  //react component listener
 componentDidmount(){
@@ -17,7 +18,6 @@ componentDidmount(){
 mapReady = (props, map) =>{
   //store the map container ele in state's map prop
   this.setState({map}); 
-
 };
 
 onMapClicked = (props) => {
@@ -25,8 +25,17 @@ onMapClicked = (props) => {
       this.setState({
         showingInfoWindow: false,
         activeMarker:null
-      })
+      });
     }
+};
+
+onMarkerClick = (props, marker,event) => {
+  console.log(props);
+  this.setState({
+      activeMarker: marker,
+      showingInfoWindow: true,
+      selectedPlace:props
+    });
 };
   render() {
     //save passed locations.
@@ -61,14 +70,14 @@ onMapClicked = (props) => {
             onClick={this.onMapClicked}
             >
             {locations && locations.map((loc)=>{
-              return <Marker title={loc.name} position={loc.pos}/>;
+              return <Marker title={loc.name} position={loc.pos} onClick={this.onMarkerClick}/>;
             })}
             
             <InfoWindow
               marker={this.state.activeMarker}
               visible={this.state.showingInfoWindow}>
                 <div>
-                  <h3>{this.state.activeMarker}</h3>
+                  <h3>{this.state.selectedPlace.title}</h3>
                 </div>
             </InfoWindow>
       </Map>
