@@ -4,7 +4,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 class MapContainer extends Component {
  state={
   map:null,
-  marker:[]
+  markers:[]
  };
  //react component listener
 componentDidmount(){
@@ -16,8 +16,20 @@ componentDidmount(){
 mapReady = (props, map) =>{
   //store the map container ele in state's map prop
   this.setState({map}); 
+
 };
+
+
   render() {
+    //save passed locations.
+    let locations= this.props.locations;
+    //to show all markers in displayed map window..
+    var bounds = new this.props.google.maps.LatLngBounds();
+    //iterate over each locations pos property.
+    for (var i = 0; i < locations.length; i++) {
+      bounds.extend(locations[i].pos);
+    }
+    //console.log(locations);
     //styele for mapcontainer
     const style = {
       width:'100%',
@@ -37,9 +49,13 @@ mapReady = (props, map) =>{
             zoom={this.props.zoom}
             style={style}
             initialCenter={center}
+            bounds={bounds}
             >
+            {locations && locations.map((loc)=>{
+              return <Marker title={loc.name} position={loc.pos}/>;
+            })}
       </Map>
-    );
+    )
   }
 }
  
