@@ -54,6 +54,14 @@ mapReady = (props, map) =>{
             {locations && locations.map((loc)=>{
               return <Marker title={loc.name} position={loc.pos}/>;
             })}
+            
+            <InfoWindow
+              marker={this.state.activeMarker}
+              visible={this.state.showingInfoWindow}>
+                <div>
+                  <h3>{this.state.activeMarker.title}</h1>
+                </div>
+            </InfoWindow>
       </Map>
     )
   }
