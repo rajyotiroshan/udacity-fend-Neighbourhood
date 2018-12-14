@@ -12,18 +12,20 @@ class LocationList extends Component {
 	};
 
 	render() {
-		let locs = this.props.locations;
 		let props = this.props;
+		if(!props.listOpen || props.locations.length <= 0) return null;
+		let locs = props.locations;
 		console.log(locs);
-		return (<div className="loc-srch-container">
+		return (
+		<div className="loc-srch-container">
 			<ul className="locs-list-container">
-			{props.listOpen && locs.length> 0 && (locs.map((loc,index)=>{
+			{
+				locs.map((loc,index)=>{
 					return <li className="loc" key={index}><button key={index}>{loc.name}</button></li>;
-				}))  
+				})
 			}
 			</ul>
-		</div>
-	)
+		</div>)
 }
 }
 
