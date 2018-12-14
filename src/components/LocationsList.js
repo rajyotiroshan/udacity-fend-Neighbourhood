@@ -18,6 +18,7 @@ class LocationList extends Component {
 		console.log(locs);
 		return (
 		<div className="loc-srch-container">
+			<input className="srch-filter" type="text" placeholder="Search for locations"/>
 			<ul className="locs-list-container">
 			{
 				locs.map((loc,index)=>{

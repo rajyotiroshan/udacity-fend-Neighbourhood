@@ -31,3 +31,9 @@
 .fa-bars:before {
     content: '';
 }
+
+/* List and Search*/
+
+.srch-filter {
+  padding:5px;
+}
