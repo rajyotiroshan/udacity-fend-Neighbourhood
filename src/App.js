@@ -30,8 +30,14 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
+          <button className="ham-icon">
+          <i className="fas fa-bars"></i>
+          <i className="fas fa-bars"></i>
+          <i className="fas fa-bars"></i>
+          </button>
           <h1 className="main-heading"> Metro Location Delhi </h1>
         </header>
+        <LocationList locations={this.state.currShowingLocs}/>
         <MapContainer
           lat={this.state.lat}
           lng={this.state.lng}

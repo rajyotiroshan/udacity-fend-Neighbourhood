@@ -13,3 +13,21 @@
 .main-heading {
   margin-top: 0;
 }
+
+/*ham burger*/
+.ham-icon {
+	position:absolute;
+	top:20px;
+	left:20px;
+}
+.fa-bars {
+    background-color: blue;
+    display: block;
+    width: 40px;
+    height: 5px;
+    margin-bottom: 4px;
+}
+
+.fa-bars:before {
+    content: '';
+}
