@@ -3,22 +3,30 @@ import React, {Component} from 'react'
 class LocationList extends Component {
 	/*
 		props = {
-			locations:this.state.currShowingLocs
-			listOpen:{this.state.ListOpen}
+			locations:this.state.currShowingLocs(arr)
+			listOpen:{this.state.ListOpen}(bool)
+			filterLocs:{this.filterLocs}(func)
 		}
 	*/
 	state = {
+		query:''
+	};
 
+	updateQuery =(evt)=>{
+		let srchFor = evt.target.value;
+		console.log(srchFor);
+		this.setState({query:srchFor});
+		this.props.filterLocs(srchFor);
 	};
 
 	render() {
 		let props = this.props;
-		if(!props.listOpen || props.locations.length <= 0) return null;
+		if(!props.listOpen) return null;
 		let locs = props.locations;
 		console.log(locs);
 		return (
 		<div className="loc-srch-container">
-			<input className="srch-filter" type="text" placeholder="Search for locations"/>
+			<input className="srch-filter" type="text" placeholder="Search for locations" onChange={this.updateQuery}/>
 			<ul className="locs-list-container">
 			{
 				locs.map((loc,index)=>{

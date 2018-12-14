@@ -17,11 +17,12 @@ class App extends Component {
     //toggle the menuOpen value bw false and true.
     this.setState({ListOpen:!this.state.ListOpen});
   };
-/*
+
   filterLocs = (srch)=> {
+    console.log(srch);
     this.setState({currShowingLocs: this.state.allLoc.filter((loc)=>loc.name.trim().toLowerCase().includes(srch.toLowerCase()))});
   };
-
+/*
   clickALocItem = (id)=> {
     this.setState({selectedLocItemID:id}); 
   };*/
@@ -38,7 +39,7 @@ class App extends Component {
           </button>
           <h1 className="main-heading"> Metro Location Delhi </h1>
         </header>
-        <LocationList locations={this.state.currShowingLocs} listOpen={this.state.ListOpen}/>
+        <LocationList locations={this.state.currShowingLocs} listOpen={this.state.ListOpen} filterLocs = {this.filterLocs}/>
         <MapContainer
           lat={this.state.lat}
           lng={this.state.lng}
