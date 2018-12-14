@@ -10,13 +10,14 @@ class App extends Component {
     zoom:13,
     allLoc:locations,
     currShowingLocs:locations,
+    ListOpen:false
   }
 
- /* toggleLocationList = (event)=>{
+ toggleList = (event)=>{
     //toggle the menuOpen value bw false and true.
-    this.setState({locationListOpen:!this.state.locationListOpen});
+    this.setState({ListOpen:!this.state.ListOpen});
   };
-
+/*
   filterLocs = (srch)=> {
     this.setState({currShowingLocs: this.state.allLoc.filter((loc)=>loc.name.trim().toLowerCase().includes(srch.toLowerCase()))});
   };
@@ -30,14 +31,14 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <button className="ham-icon">
+          <button className="ham-icon" onClick={this.toggleList}>
           <i className="fas fa-bars"></i>
           <i className="fas fa-bars"></i>
           <i className="fas fa-bars"></i>
           </button>
           <h1 className="main-heading"> Metro Location Delhi </h1>
         </header>
-        <LocationList locations={this.state.currShowingLocs}/>
+        <LocationList locations={this.state.currShowingLocs} listOpen={this.state.ListOpen}/>
         <MapContainer
           lat={this.state.lat}
           lng={this.state.lng}
