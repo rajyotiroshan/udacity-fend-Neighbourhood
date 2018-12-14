@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Map, GoogleApiWrapper} from 'google-maps-react';
+import {Map, GoogleApiWrapper, InfoWindow} from 'google-maps-react';
  
 class MapContainer extends Component {
   /*
@@ -15,7 +15,8 @@ class MapContainer extends Component {
   activeMarker:{},
   showingInfoWindow:false,
   markers:[],
-  markersProps:[]
+  markersProps:[],
+  activeMarkerProp:{}
  };
 
  //react component listener
@@ -28,7 +29,7 @@ createMarker=()=>{
     //console.log(loc.title);
     //create new obj for marker property.
     let markerProp={}, marker;
-    markerProp.key = loc.id;
+    markerProp.key = index;
     markerProp.title = loc.name;
     markerProp.position = loc.pos;
     //include it in markersProps list.
@@ -53,12 +54,9 @@ componentDidMount() {
   
 }
 //info-window for marker
-/*displayInfoWindow = (marker,loc) =>{
-  let infowindow = new window.google.maps.InfoWindow({
-    content: loc.title
-  });
-  infowindow.open(this.state.map,marker);
-};*/
+displayInfoWindow = (markerProp,marker) =>{
+this.setState({showingInfoWindow:true, activeMarker: marker, activeMarkerProp: markerProp});
+};
 
 //listener for map ready
 
@@ -78,7 +76,9 @@ mapReady = (props, map) =>{
 };*/
 
 onMarkerClick = function(markerProp,marker){
- console.log(markerProp.title);
+ //console.log(markerProp.title);
+ //display info window.
+ this.displayInfoWindow(markerProp,marker);
 };
 
   render() {
@@ -113,6 +113,13 @@ onMarkerClick = function(markerProp,marker){
             bounds={bounds}
             onClick={this.onMapClicked}
             >
+          <InfoWindow
+          marker={this.state.activeMarker}
+          visible={this.state.showingInfoWindow}>
+            <div>
+              <h3>{this.state.activeMarkerProp.title}</h3>
+            </div>
+        </InfoWindow>
       </Map>
     )
   }
