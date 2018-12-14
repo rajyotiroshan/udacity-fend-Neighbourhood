@@ -66,14 +66,14 @@ mapReady = (props, map) =>{
   this.createMarker();
 };
 
-/*onMapClicked = (props) => {
+onMapClicked = (props) => {
   if (this.state.showingInfoWindow) {
       this.setState({
         showingInfoWindow: false,
         activeMarker:null
       });
     }
-};*/
+};
 
 onMarkerClick = function(markerProp,marker){
  //console.log(markerProp.title);
