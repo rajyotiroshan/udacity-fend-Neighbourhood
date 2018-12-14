@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import locations from './location.json'
 import MapContainer from './components/MapDisplay'
-import LocationsList from './components/LocationsList'
+import LocationList from './components/LocationsList'
 class App extends Component {
   state= {
     lat:28.627956,
