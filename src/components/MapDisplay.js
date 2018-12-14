@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+import {Map, GoogleApiWrapper} from 'google-maps-react';
  
 class MapContainer extends Component {
   /*
@@ -12,38 +12,74 @@ class MapContainer extends Component {
   */
  state={
   map:null,
-  activeMarkers:{},
+  activeMarker:{},
   showingInfoWindow:false,
-  selectedPlace:{}
+  markers:[],
+  markersProps:[]
  };
- //react component listener
-componentDidmount(){
 
+ //react component listener
+createMarker=()=>{
+  //display marker.
+  let markers=[],markersProps=[];
+  //iterate over all locs.
+  markers = this.props.locations.map((loc,index)=>{
+    //create a marker object.
+    //console.log(loc.title);
+    //create new obj for marker property.
+    let markerProp={}, marker;
+    markerProp.key = loc.id;
+    markerProp.title = loc.name;
+    markerProp.position = loc.pos;
+    //include it in markersProps list.
+    markersProps.push(markerProp);
+    //new marker object.
+    marker = new window.google.maps.Marker({
+    position: loc.pos,
+    map: this.state.map,
+    title: loc.name});
+    markers.push(marker);
+    //console.log(marker);
+    marker.addListener('click', ()=>{
+      this.onMarkerClick(markerProp,marker);
+    });
+    return marker;
+  });
+this.setState({markers,markersProps});
+};
+
+componentDidMount() {
+//  console.log("cdmount");
+  
 }
+//info-window for marker
+/*displayInfoWindow = (marker,loc) =>{
+  let infowindow = new window.google.maps.InfoWindow({
+    content: loc.title
+  });
+  infowindow.open(this.state.map,marker);
+};*/
 
 //listener for map ready
 
 mapReady = (props, map) =>{
   //store the map container ele in state's map prop
   this.setState({map}); 
+  this.createMarker();
 };
 
-onMapClicked = (props) => {
+/*onMapClicked = (props) => {
   if (this.state.showingInfoWindow) {
       this.setState({
         showingInfoWindow: false,
         activeMarker:null
       });
     }
-};
-/*
-onMarkerClick = (props, marker,event) => {
-  this.setState({
-      activeMarker: marker,
-      showingInfoWindow: true,
-      selectedPlace:props
-    });
 };*/
+
+onMarkerClick = function(markerProp,marker){
+ console.log(markerProp.title);
+};
 
   render() {
     //save passed locations.
