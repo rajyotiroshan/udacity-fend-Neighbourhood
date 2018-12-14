@@ -21,6 +21,7 @@ class MapContainer extends Component {
 
  //react component listener
 createMarker=()=>{
+  console.log(this.props.locations);
   //display marker.
   let markers=[],markersProps=[];
   //iterate over all locs.
@@ -49,9 +50,16 @@ createMarker=()=>{
 this.setState({markers,markersProps});
 };
 
-componentDidMount() {
+componentDidUpdate(preProps,preState) {
 //  console.log("cdmount");
-  
+//create new marker with new locations.
+  if(preProps.locations.length !== this.props.locations.length)
+    {
+      //hide all markers.
+      //console.log(preState.markers);
+      preState.markers.forEach((marker)=>marker.setMap(null));
+      this.createMarker(); 
+    } 
 }
 //info-window for marker
 displayInfoWindow = (markerProp,marker) =>{
@@ -82,10 +90,11 @@ onMarkerClick = function(markerProp,marker){
 };
 
   render() {
+    let props = this.props;
     //save passed locations.
-    let locations= this.props.locations;
+    let locations= props.locations;
     //to show all markers in displayed map window..
-    var bounds = new this.props.google.maps.LatLngBounds();
+    var bounds = new props.google.maps.LatLngBounds();
     //iterate over each locations pos property.
     for (var i = 0; i < locations.length; i++) {
       bounds.extend(locations[i].pos);
@@ -98,16 +107,16 @@ onMarkerClick = function(markerProp,marker){
     }
     //initial focused locationfor map
     const center = {
-      lat:this.props.lat,
-      lng:this.props.lng
+      lat:props.lat,
+      lng:props.lng
     }
 
     return (
       <Map  role="application"
             ariaLabel="map"
             onReady={this.mapReady}
-            google={this.props.google} 
-            zoom={this.props.zoom}
+            google={props.google} 
+            zoom={props.zoom}
             style={style}
             initialCenter={center}
             bounds={bounds}

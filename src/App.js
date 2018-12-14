@@ -19,7 +19,6 @@ class App extends Component {
   };
 
   filterLocs = (srch)=> {
-    console.log(srch);
     this.setState({currShowingLocs: this.state.allLoc.filter((loc)=>loc.name.trim().toLowerCase().includes(srch.toLowerCase()))});
   };
 /*

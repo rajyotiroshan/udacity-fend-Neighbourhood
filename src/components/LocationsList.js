@@ -14,7 +14,6 @@ class LocationList extends Component {
 
 	updateQuery =(evt)=>{
 		let srchFor = evt.target.value;
-		console.log(srchFor);
 		this.setState({query:srchFor});
 		this.props.filterLocs(srchFor);
 	};
@@ -23,7 +22,6 @@ class LocationList extends Component {
 		let props = this.props;
 		if(!props.listOpen) return null;
 		let locs = props.locations;
-		console.log(locs);
 		return (
 		<div className="loc-srch-container">
 			<input className="srch-filter" type="text" placeholder="Search for locations" onChange={this.updateQuery}/>
