@@ -8,6 +8,7 @@ class MapContainer extends Component {
           lng={this.state.lng}
           zoom={this.state.zoom}
           locations={this.state.currShowingLocs}
+          clickItemIndex={this.selectedLocItemIndex}(num)
   }
   */
  state={
@@ -16,12 +17,12 @@ class MapContainer extends Component {
   showingInfoWindow:false,
   markers:[],
   markersProps:[],
-  activeMarkerProp:{}
+  activeMarkerProp:{},
  };
 
  //react component listener
 createMarker=()=>{
-  console.log(this.props.locations);
+  //console.log(this.props.locations);
   //display marker.
   let markers=[],markersProps=[];
   //iterate over all locs.
@@ -53,13 +54,37 @@ this.setState({markers,markersProps});
 componentDidUpdate(preProps,preState) {
 //  console.log("cdmount");
 //create new marker with new locations.
+//console.log(this.props.clickItemIndex);
   if(preProps.locations.length !== this.props.locations.length)
     {
+      //console.log(this.props.clickItemIndex);
       //hide all markers.
       //console.log(preState.markers);
       preState.markers.forEach((marker)=>marker.setMap(null));
       this.createMarker(); 
     } 
+
+  if(this.props.clickItemIndex !== null &&  preProps.clickItemIndex !== this.props.clickItemIndex ){
+    this.setState({showingInfoWindow : !this.state.showingInfoWindow});
+  }
+
+
+  if(this.props.clickItemIndex !== null && preProps.clickItemIndex == this.props.clickItemIndex) {
+   this.state.activeMarker.setAnimation(null);
+  }
+
+  if(!this.state.showingInfoWindow && this.props.clickItemIndex!=null && this.state.map != null) {
+    //access marker.
+   // console.log(this.props.clickItemIndex);
+   /*//prev clicked loc marker animation to null.
+    if(preProps.clickItemIndex!== null){
+      preState.markers[preProps.clickItemIndex].setAnimation(null);
+    }*/
+    let marker = this.state.markers[this.props.clickItemIndex];
+    marker.setAnimation(window.google.maps.Animation.BOUNCE);
+    let markerProp = this.state.markersProps[this.props.clickItemIndex];
+    this.displayInfoWindow(markerProp,marker);
+  }
 }
 //info-window for marker
 displayInfoWindow = (markerProp,marker) =>{
@@ -90,6 +115,7 @@ onMarkerClick = function(markerProp,marker){
 };
 
   render() {
+   //console.log(this.props.clickItemIndex);workin
     let props = this.props;
     //save passed locations.
     let locations= props.locations;

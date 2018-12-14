@@ -10,7 +10,8 @@ class App extends Component {
     zoom:13,
     allLoc:locations,
     currShowingLocs:locations,
-    ListOpen:false
+    ListOpen:false,
+    selectedLocItemIndex:null
   }
 
  toggleList = (event)=>{
@@ -21,13 +22,13 @@ class App extends Component {
   filterLocs = (srch)=> {
     this.setState({currShowingLocs: this.state.allLoc.filter((loc)=>loc.name.trim().toLowerCase().includes(srch.toLowerCase()))});
   };
-/*
-  clickALocItem = (id)=> {
-    this.setState({selectedLocItemID:id}); 
-  };*/
+
+  clickALocItem = (index)=> {
+    this.setState({selectedLocItemIndex:index}); 
+  };
 
   render() {
-    
+    //console.log(this.state.selectedLocItemIndex);//working
     return (
       <div className="App">
         <header className="App-header">
@@ -38,12 +39,13 @@ class App extends Component {
           </button>
           <h1 className="main-heading"> Metro Location Delhi </h1>
         </header>
-        <LocationList locations={this.state.currShowingLocs} listOpen={this.state.ListOpen} filterLocs = {this.filterLocs}/>
+        <LocationList locations={this.state.currShowingLocs} listOpen={this.state.ListOpen} filterLocs = {this.filterLocs} clickALocItem={this.clickALocItem}/>
         <MapContainer
           lat={this.state.lat}
           lng={this.state.lng}
           zoom={this.state.zoom}
           locations={this.state.currShowingLocs}
+          clickItemIndex={this.state.selectedLocItemIndex}
         />
       </div>
     );

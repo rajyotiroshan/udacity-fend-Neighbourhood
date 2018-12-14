@@ -6,6 +6,7 @@ class LocationList extends Component {
 			locations:this.state.currShowingLocs(arr)
 			listOpen:{this.state.ListOpen}(bool)
 			filterLocs:{this.filterLocs}(func)
+			clickALocItem={this.clickALocItem}(func)
 		}
 	*/
 	state = {
@@ -18,6 +19,10 @@ class LocationList extends Component {
 		this.props.filterLocs(srchFor);
 	};
 
+	locItemClicked = (LocIndex)=>{
+		this.props.clickALocItem(LocIndex);
+	};
+
 	render() {
 		let props = this.props;
 		if(!props.listOpen) return null;
@@ -28,7 +33,7 @@ class LocationList extends Component {
 			<ul className="locs-list-container">
 			{
 				locs.map((loc,index)=>{
-					return <li className="loc" key={index}><button key={index}>{loc.name}</button></li>;
+					return <li className="loc" key={index}><button key={index} onClick={()=>{this.locItemClicked(index);}}>{loc.name}</button></li>;
 				})
 			}
 			</ul>
