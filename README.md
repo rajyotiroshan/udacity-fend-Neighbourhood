@@ -1,8 +1,16 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+##About 
+This is udacity fend reuired project for graduation.This is the final project for graduation.
+It is developed using reactjs framework.
+It displays the near by metro locations in delhi in the vidhansabha neighbourhood.
+User can open up the displays list of locations by clicking on hamburger sign. search for a location(from listed one) to point out the marker on the map for the location.
 
-## Available Scripts
+## Running the application
 
-In the project directory, you can run:
+clone the project using.move into the project directory.And run the cmd
+
+### `npm install` 
+ To install the required project dependencies.
 
 ### `npm start`
 

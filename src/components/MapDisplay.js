@@ -13,11 +13,12 @@ class MapContainer extends Component {
   */
  state={
   map:null,
-  activeMarker:{},
+  activeMarker:null,
   showingInfoWindow:false,
   markers:[],
   markersProps:[],
   activeMarkerProp:{},
+  activeMarkerImg:''
  };
 
  //react component listener
@@ -69,7 +70,7 @@ componentDidUpdate(preProps,preState) {
   }
 
 
-  if(this.props.clickItemIndex !== null && preProps.clickItemIndex == this.props.clickItemIndex) {
+  if(this.props.clickItemIndex !== null && preProps.clickItemIndex == this.props.clickItemIndex && this.state.activeMarker) {
    this.state.activeMarker.setAnimation(null);
   }
 
@@ -88,7 +89,24 @@ componentDidUpdate(preProps,preState) {
 }
 //info-window for marker
 displayInfoWindow = (markerProp,marker) =>{
-this.setState({showingInfoWindow:true, activeMarker: marker, activeMarkerProp: markerProp});
+  let imgURL='';
+  //fetch req from foursquare.
+  fetch(`https://api.unsplash.com/search/photos?page=1&query=${markerProp.title}`,{
+          headers:{
+            Authorization:"Client-ID 6b5d3de1d8df43fc84c8df69b3e0b0e6e0e9dffe528caae212762dd4d8142c91"
+          }
+        })
+        .then((response)=>{
+          return response.json();
+        })
+        .then((res)=>{
+          imgURL = res.results[0].urls.thumb;
+          this.setState({showingInfoWindow:true, activeMarker: marker, activeMarkerProp: markerProp, activeMarkerImg:imgURL});
+        })
+        .catch(function(err){
+          console.log(err);
+        });
+//this.setState({showingInfoWindow:true, activeMarker: marker, activeMarkerProp: markerProp});
 };
 
 //listener for map ready
@@ -153,6 +171,7 @@ onMarkerClick = function(markerProp,marker){
           visible={this.state.showingInfoWindow}>
             <div>
               <h3>{this.state.activeMarkerProp.title}</h3>
+              <a href={`${this.state.activeMarkerImg}`} alt={`${this.state.activeMarkerProp.title} image`}> view imagefrom unsplash</a>
             </div>
         </InfoWindow>
       </Map>

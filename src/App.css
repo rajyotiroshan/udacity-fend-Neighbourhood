@@ -4,14 +4,22 @@
 
 .App-header {
   background-color: #282c34;
-  font-size: calc(10px + 2vmin);
   color: white;
   text-align: center;
   margin-top: 0;
+  height:80px;
 }
 
 .main-heading {
   margin-top: 0;
+  margin-left: 25px;
+}
+@media only screen and (max-width: 500px) {
+  .main-heading {
+    margin-top: 0;
+    font-size: 25px;
+    top: 19px;
+  }
 }
 
 /*ham burger*/
@@ -32,8 +40,17 @@
     content: '';
 }
 
+@media only screen and (max-width: 550px) {
+  .ham-icon {
+  position:relative;
+  top:20px;
+  float:right;
+  margin-right: 40px;
+}
+}
 /* List and Search*/
 
 .srch-filter {
   padding:5px;
 }
+
