@@ -35,6 +35,9 @@ createMarker=()=>{
     markerProp.key = index;
     markerProp.title = loc.name;
     markerProp.position = loc.pos;
+    markerProp.street = loc.street;
+    markerProp.city = loc.city;
+    markerProp.pin = loc.pin;
     //include it in markersProps list.
     markersProps.push(markerProp);
     //new marker object.
@@ -171,6 +174,8 @@ onMarkerClick = function(markerProp,marker){
           visible={this.state.showingInfoWindow}>
             <div>
               <h3>{this.state.activeMarkerProp.title}</h3>
+              <p>{this.state.activeMarkerProp.street}</p>
+              <p>{this.state.activeMarkerProp.city},{this.state.activeMarkerProp.pin}</p>
               <a href={`${this.state.activeMarkerImg}`} alt={`${this.state.activeMarkerProp.title} image`}> view imagefrom unsplash</a>
             </div>
         </InfoWindow>
