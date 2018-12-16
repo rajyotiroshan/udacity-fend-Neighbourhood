@@ -106,8 +106,8 @@ displayInfoWindow = (markerProp,marker) =>{
           imgURL = res.results[0].urls.thumb;
           this.setState({showingInfoWindow:true, activeMarker: marker, activeMarkerProp: markerProp, activeMarkerImg:imgURL});
         })
-        .catch(function(err){
-          console.log(err);
+        .catch((err)=>{
+          this.setState({showingInfoWindow:true, activeMarker: marker, activeMarkerProp: markerProp, activeMarkerImg:""});
         });
 //this.setState({showingInfoWindow:true, activeMarker: marker, activeMarkerProp: markerProp});
 };
@@ -176,7 +176,7 @@ onMarkerClick = function(markerProp,marker){
               <h3>{this.state.activeMarkerProp.title}</h3>
               <p>{this.state.activeMarkerProp.street}</p>
               <p>{this.state.activeMarkerProp.city},{this.state.activeMarkerProp.pin}</p>
-              <a href={`${this.state.activeMarkerImg}`} alt={`${this.state.activeMarkerProp.title} image`}> view imagefrom unsplash</a>
+              <a href={`${this.state.activeMarkerImg}`} alt={`${this.state.activeMarkerProp.title} image link ${!this.state.activeMarkerImg && "not available"}`}> {!this.state.activeMarkerImg ?"image link not available":"view imagefrom unsplash"}</a>
             </div>
         </InfoWindow>
       </Map>
